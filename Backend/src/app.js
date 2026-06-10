@@ -7,7 +7,8 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173",
+             "https://interview-mentor-ai-alpha.vercel.app"],
     credentials: true
 }))
 
@@ -20,6 +21,9 @@ const interviewRouter = require("./routes/interview.routes")
 app.use("/api/auth", authRouter)
 app.use("/api/interview", interviewRouter)
 
+app.get("/", (req, res) => {
+    res.send("Backend is running 🚀");
+});
 
 
 module.exports = app
